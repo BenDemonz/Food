@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ben的护肝养胃饮食红绿灯 (3.1版)</title>
+<title>Ben的护肝养胃饮食红绿灯 (3.2版)</title>
 <style>
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -13,7 +13,7 @@
         color: #333;
     }
     .container {
-        max-width: 900px; /* 稍微加宽一点以容纳英文 */
+        max-width: 900px;
         margin: 0 auto;
         background: #fff;
         border-radius: 8px;
@@ -29,6 +29,31 @@
     h2 { margin: 0; font-size: 1.3rem; }
     p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
 
+    /* --- 新增：导航菜单样式 --- */
+    nav {
+        background-color: #34495e;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 16px;
+        display: inline-block;
+    }
+    nav a:hover {
+        text-decoration: underline;
+        color: #f1c40f; /* 鼠标悬停变黄 */
+    }
+    /* 当前页面高亮 */
+    nav a.current {
+        font-weight: bold;
+        color: #f1c40f; 
+    }
+    /* ----------------------- */
+
     .table-wrapper {
         overflow-x: auto;
     }
@@ -36,7 +61,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 700px; /* 稍微加宽 */
+        min-width: 700px;
     }
 
     th, td {
@@ -78,10 +103,14 @@
 
 <div class="container">
     <header>
-        <h2>Ben的专属饮食红绿灯 (3.1 Pro)</h2>
+        <h2>Ben的专属饮食红绿灯 (3.2 Pro)</h2>
         <p>目标：护肝 · 降胆固醇 · 养胃消胀</p>
     </header>
 
+    <nav>
+        <a href="index.html" class="current">🏠 首页 (Home)</a>
+        <a href="recipes.html">🥗 食谱推荐 (Recipes)</a>
+    </nav>
     <div class="table-wrapper">
         <table>
             <thead>
