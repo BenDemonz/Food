@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ben的护肝养胃饮食红绿灯 (3.0版)</title>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 10px;
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    header {
+        background-color: #2c3e50;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+    }
+    h2 { margin: 0; font-size: 1.2rem; }
+    p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
 
+    .table-wrapper {
+        overflow-x: auto; /* 允许手机左右滑动 */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px; /* 保证在小屏上不挤成一团 */
+    }
+
+    th, td {
+        padding: 12px 10px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        vertical-align: top;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        color: #555;
+    }
+
+    /* 列样式 */
+    .col-category { background-color: #e9ecef; font-weight: bold; width: 15%; }
+    .col-green { background-color: #d4edda; color: #155724; width: 25%; }
+    .col-tip { background-color: #fff; color: #666; font-style: italic; width: 20%; font-size: 13px; }
+    .col-yellow { background-color: #fff3cd; color: #856404; width: 20%; }
+    .col-red { background-color: #f8d7da; color: #721c24; width: 20%; }
+
+    /* 标签样式 */
+    .tag {
+        display: inline-block;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.5);
+        margin-bottom: 4px;
+        font-weight: bold;
+    }
+
+    .note {
+        padding: 15px;
+        background-color: #e8f4fd;
+        font-size: 13px;
+        color: #0c5460;
+        border-top: 1px solid #bee5eb;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h2>Ben的专属饮食红绿灯 (3.0)</h2>
+        <p>目标：护肝 · 降胆固醇 · 养胃消胀</p>
+    </header>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-category">类别</th>
+                    <th class="col-green">✅ 绿灯区<br><small>(常吃/放心)</small></th>
+                    <th class="col-tip">💡 理由/吃法</th>
+                    <th class="col-yellow">⚠️ 黄灯区<br><small>(限量/小心)</small></th>
+                    <th class="col-red">❌ 红灯区<br><small>(禁止/极少)</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-category">主食<br>Carbs</td>
+                    <td class="col-green">
+                        <b>杂粮饭</b> (糙米/藜麦)<br>
+                        <b>荞麦面</b> (Soba)<br>
+                        <b>玉米 / 红薯</b><br>
+                        <b>南瓜 / 山药</b><br>
+                        <b>Light Rye 黑麦面包</b>
+                    </td>
+                    <td class="col-tip">杂粮需与白米1:1混合；黑麦面包每天限2片；山药蒸着吃最养胃。</td>
+                    <td class="col-yellow">
+                        白米饭 (限半碗)<br>
+                        水煮饺子 (限10-12个)<br>
+                        普通面条 (必须混蔬菜)<br>
+                        全麦意面
+                    </td>
+                    <td class="col-red">
+                        生煎包 / 锅贴 (太油)<br>
+                        糯米 (极难消化)<br>
+                        炒饭 / 炒面<br>
+                        起酥面包 / 油条
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-category">蛋白质<br>Protein</td>
+                    <td class="col-green">
+                        <b>鸡蛋</b> (煮/蒸)<br>
+                        <b>金枪鱼</b> (泉水浸)<br>
+                        <b>三文鱼 / 鳟鱼</b><br>
+                        <b>白身鱼</b> (巴沙/盲曹)<br>
+                        <b>豆腐</b> (嫩/老/冻)<br>
+                        <b>虾仁 / 鸡胸</b>
+                    </td>
+                    <td class="col-tip">白身鱼极其容易消化；金枪鱼选Springwater；三文鱼无需放油煎。</td>
+                    <td class="col-yellow">
+                        猪瘦肉 (里脊)<br>
+                        牛排 (注意份量)<br>
+                        烤鸭 (去皮)<br>
+                        全脂芝士
+                    </td>
+                    <td class="col-red">
+                        五花肉 / 肥肉<br>
+                        炸猪排 / 炸鸡<br>
+                        加工肉 (香肠/培根)<br>
+                        油浸罐头 (In Oil)<br>
+                        咸鱼 / 腊肉
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-category">蔬菜<br>Veggies</td>
+                    <td class="col-green">
+                        <b>白萝卜</b> (助消化神器)<br>
+                        <b>西葫芦 / 茄子</b> (软糯)<br>
+                        <b>绿叶菜</b> (菠菜/白菜)<br>
+                        <b>秋葵 / 菌菇</b><br>
+                        <b>海带 / 紫菜</b><br>
+                        <b>黄瓜 / 番茄</b>
+                    </td>
+                    <td class="col-tip">白萝卜含酶助消食；茄子千万别油炸；秋葵黏液护胃。</td>
+                    <td class="col-yellow">
+                        土豆 (算主食)<br>
+                        莲藕 (算主食)<br>
+                        含糖酱汁做的菜<br>
+                        咸菜 (高盐)
+                    </td>
+                    <td class="col-red">
+                        地三鲜 (油炸)<br>
+                        干煸豆角 (油炸)<br>
+                        红烧茄子 (吸油)<br>
+                        勾芡很重的菜
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-category">水果<br>Fruits</td>
+                    <td class="col-green">
+                        <b>草莓</b> (每天10-15颗)<br>
+                        <b>绿奇异果</b> (通便)<br>
+                        <b>蓝莓 / 树莓</b><br>
+                        <b>青苹果</b> (带皮嚼碎)<br>
+                        <b>木瓜</b>
+                    </td>
+                    <td class="col-tip">奇异果饭后吃消肉积；草莓从冰箱拿出来要回温再吃。</td>
+                    <td class="col-yellow">
+                        西瓜 (限2片,仅白天)<br>
+                        哈密瓜<br>
+                        香蕉 (每天限1根)<br>
+                        菠萝
+                    </td>
+                    <td class="col-red">
+                        葡萄 / 提子 (糖极高)<br>
+                        芒果 (湿热)<br>
+                        荔枝 / 榴莲<br>
+                        鲜榨果汁 (禁止)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-category">零食调味<br>Snack&Condiments</td>
+                    <td class="col-green">
+                        <b>生核桃/扁桃仁</b> (30g)<br>
+                        <b>希腊酸奶</b> (无糖)<br>
+                        <b>韩国泡菜</b> (每餐必吃)<br>
+                        <b>醋 / 柠檬汁</b><br>
+                        <b>Nutra-Life 消化酶</b>
+                    </td>
+                    <td class="col-tip">泡菜富含益生菌；坚果每天限一小把；消化酶随餐第一口吃。</td>
+                    <td class="col-yellow">
+                        黑巧克力 (85%+)<br>
+                        代糖饮料 (Coke Zero)<br>
+                        蒜泥 / 蚝油<br>
+                        苏打饼干
+                    </td>
+                    <td class="col-red">
+                        盐焗/油炸坚果<br>
+                        薯片 / 饼干 / 蛋糕<br>
+                        含糖汽水 / 奶茶<br>
+                        生姜 (你反胃不吃)<br>
+                        气泡水 (易胀气)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        <strong>💡 Ben的执行备注：</strong><br>
+        1. 每天坚果死守 30g。<br>
+        2. 草莓每天限半盒 (约200g)。<br>
+        3. 胃胀气急救：白萝卜汤 + 奇异果 + 消化酶。<br>
+        4. 尽量把食物嚼成糊状再吞咽。
+    </div>
+</div>
+
+</body>
+</html>
