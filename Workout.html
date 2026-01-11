@@ -3,221 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ben's Workout Plan</title>
+    <title>Ben's Workout</title>
     <style>
-        :root {
-            --primary: #1565c0; /* Blue for movement */
-            --accent: #fbc02d; /* Yellow for energy */
-            --bg: #f4f6f8;
-            --card: #ffffff;
-            --text: #333;
-        }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f4f6f8; margin: 0; padding-bottom: 60px; color: #333; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; border-top: 1px solid #eee; }
+        .nav-item { text-decoration: none; color: #999; font-size: 0.8rem; text-align: center; flex: 1; }
+        .nav-item.active { color: #1565c0; font-weight: bold; } /* Blue for sport */
+        .nav-icon { display: block; font-size: 1.5rem; margin-bottom: 2px; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container { max-width: 800px; margin: 0 auto; }
-
-        header {
-            text-align: center;
-            background: linear-gradient(135deg, #1565c0, #42a5f5);
-            color: white;
-            padding: 30px 20px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3);
-        }
-
-        h1 { margin: 0; font-size: 1.8rem; }
-        p.subtitle { margin: 10px 0 0; opacity: 0.9; font-size: 0.95rem; }
-
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        h2 { border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-top: 0; color: #1565c0; font-size: 1.3rem; }
-
-        /* 时间轴样式 */
-        .timeline-item {
-            display: flex;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #eee;
-        }
-        .time { font-weight: bold; width: 70px; flex-shrink: 0; color: #555; }
-        .activity { flex-grow: 1; }
-        .icon { margin-right: 8px; }
-
-        /* 周计划网格 */
-        .week-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-        }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { background: #1565c0; color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
         
-        .day-box {
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 15px;
-            background: #fff;
-            transition: transform 0.2s;
-        }
-        .day-box:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        h2 { margin-top: 0; font-size: 1.2rem; color: #1565c0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        .timeline-item { display: flex; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #eee; align-items: center; }
+        .time { font-weight: bold; width: 60px; color: #555; font-size: 1.1rem; }
         
-        .day-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .day-name { font-weight: bold; color: #1565c0; }
-        .day-type { font-size: 0.8rem; background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 10px; }
-        .rest-type { background: #fff3e0; color: #ef6c00; }
-
-        .task { display: flex; align-items: center; margin-bottom: 5px; font-size: 0.9rem; }
-        .checkbox { 
-            width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 4px; margin-right: 10px; 
-            display: inline-block;
-        }
-
-        /* 底部说明 */
-        .tips { font-size: 0.9rem; color: #666; background: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 5px solid #2e7d32; }
+        .task-box { border: 1px solid #eee; border-radius: 8px; padding: 12px; margin-bottom: 10px; background: #fafafa; display: flex; align-items: center; }
+        .checkbox { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; margin-right: 12px; }
+        
+        .tip { background: #e3f2fd; color: #0d47a1; padding: 10px; border-radius: 8px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Ben's 脂肪粉碎计划</h1>
-        <p class="subtitle">目标：消除内脏脂肪 · 改善胃胀气 · 找回70kg</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1 style="margin:0; font-size:1.5rem;">脂肪粉碎机</h1>
+            <p style="margin:5px 0 0; opacity:0.9; font-size:0.9rem;">20:00 黄金燃脂时刻</p>
+        </header>
 
-    <div class="card">
-        <h2>⏰ 每日黄金时间轴 (Daily Routine)</h2>
-        <div class="timeline-item">
-            <div class="time">07:40</div>
-            <div class="activity">
-                <span class="icon">🌅</span><b>起床唤醒</b><br>
-                <small>喝一杯温水 + 做 10 个深蹲 (激活代谢，只需30秒)。</small>
+        <div class="card">
+            <h2>⏰ 今日时间轴</h2>
+            <div class="timeline-item">
+                <div class="time">07:40</div>
+                <div>喝温水 + 深蹲10个 (唤醒代谢)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">13:00</div>
+                <div>午餐后散步 10分钟 (防胃胀)</div>
+            </div>
+            <div class="timeline-item" style="background:#e3f2fd; padding:10px; border-radius:8px; border-bottom:none;">
+                <div class="time">20:00</div>
+                <div><b>🔥 黄金运动时间</b></div>
             </div>
         </div>
-        <div class="timeline-item">
-            <div class="time">10:00</div>
-            <div class="activity">
-                <span class="icon">🏢</span><b>办公室久坐打断</b><br>
-                <small>去接水，站立 2 分钟。防止脂肪囤积在肚子。</small>
+
+        <div class="card">
+            <h2>📅 本周任务 (点击打卡)</h2>
+            
+            <div class="task-box">
+                <div class="checkbox"></div>
+                <div><b>周一 (启动)</b>: 散步 40分钟 + 3次快走冲刺</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="checkbox"></div>
+                <div><b>周二 (力量)</b>: 散步 30分钟 + 回家深蹲 15个x3组</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="checkbox"></div>
+                <div><b>周三 (耐力)</b>: 散步 50分钟 (保持不看手机)</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="checkbox"></div>
+                <div><b>周四 (休息)</b>: 随便走走 20分钟</div>
+            </div>
+
+            <div class="task-box">
+                <div class="checkbox"></div>
+                <div><b>周五 (放松)</b>: 散步 30分钟 + 听播客</div>
             </div>
         </div>
-        <div class="timeline-item">
-            <div class="time">13:00</div>
-            <div class="activity">
-                <span class="icon">🚶</span><b>午餐后散步</b><br>
-                <small>哪怕只走 10 分钟。这对你的<b>胃胀气</b>是救命的。</small>
-            </div>
-        </div>
-        <div class="timeline-item" style="background:#e3f2fd; padding:10px; border-radius:8px; border-bottom:none;">
-            <div class="time">20:00</div>
-            <div class="activity">
-                <span class="icon">🔥</span><b>黄金燃脂时间 (Dinner + 1.5hr)</b><br>
-                <small>此时血糖平稳，去散步是直接消耗内脏脂肪的最佳时机。</small>
-            </div>
-        </div>
-    </div>
 
-    <div class="card">
-        <h2>📅 本周任务表 (Weekly Mission)</h2>
-        <p style="margin-bottom:15px; font-size:0.9rem; color:#666;">重点：保持心率在“有点喘但能说话”的状态 (Zone 2)。</p>
-        
-        <div class="week-grid">
-            <div class="day-box">
-                <div class="day-header">
-                    <span class="day-name">周一 Mon</span>
-                    <span class="day-type">启动日</span>
-                </div>
-                <div class="task"><span class="checkbox"></span>晚饭后散步 40分钟</div>
-                <div class="task"><span class="checkbox"></span>途中做 30秒 快走冲刺 x 3次</div>
-            </div>
-
-            <div class="day-box">
-                <div class="day-header">
-                    <span class="day-name">周二 Tue</span>
-                    <span class="day-type">力量+有氧</span>
-                </div>
-                <div class="task"><span class="checkbox"></span>晚饭后散步 30分钟</div>
-                <div class="task"><span class="checkbox"></span>回家后：深蹲 15个 x 3组</div>
-                <small style="color:#666; margin-left:30px;">(练腿能极大消耗糖分，护肝)</small>
-            </div>
-
-            <div class="day-box">
-                <div class="day-header">
-                    <span class="day-name">周三 Wed</span>
-                    <span class="day-type">耐力日</span>
-                </div>
-                <div class="task"><span class="checkbox"></span>晚饭后散步 45-50分钟</div>
-                <div class="task"><span class="checkbox"></span>保持匀速，不要停下来看手机</div>
-            </div>
-
-            <div class="day-box">
-                <div class="day-header">
-                    <span class="day-name">周四 Thu</span>
-                    <span class="day-type rest-type">主动恢复</span>
-                </div>
-                <div class="task"><span class="checkbox"></span>轻松散步 20分钟 (消食为主)</div>
-                <div class="task"><span class="checkbox"></span>做 5分钟 拉伸/泡沫轴放松</div>
-            </div>
-
-            <div class="day-box">
-                <div class="day-header">
-                    <span class="day-name">周五 Fri</span>
-                    <span class="day-type">轻松日</span>
-                </div>
-                <div class="task"><span class="checkbox"></span>晚餐吃得少，可以早点走</div>
-                <div class="task"><span class="checkbox"></span>散步 30分钟 + 听喜欢的播客</div>
-            </div>
-
-            <div class="day-box" style="grid-column: span 1; background:#f1f8e9;">
-                <div class="day-header">
-                    <span class="day-name">周末 Weekend</span>
-                    <span class="day-type">户外挑战</span>
-                </div>
-                <div class="task"><span class="checkbox"></span><b>周六</b>：去 Point Cook Coastal Park 走 1小时</div>
-                <div class="task"><span class="checkbox"></span><b>周日</b>：大扫除 30分钟 (这也是运动)</div>
-            </div>
+        <div class="tip">
+            💡 <b>Ben的贴士</b>：不需要跑！快走到身体微微发热、有点喘但能说话，就是脂肪在燃烧的信号 (Zone 2)。
         </div>
     </div>
 
-    <div class="card">
-        <h2>🛠️ 居家微运动 (No Gym Needed)</h2>
-        
-        <div style="margin-bottom:15px;">
-            <b>🦵 空手深蹲 (Squats) - 护肝动作No.1</b><br>
-            <small>针对：大腿肌肉（人体最大的糖仓）。练腿能防止糖分转化为脂肪堆在肝脏。</small><br>
-            <i>做法：双脚比肩宽，屁股向后坐，像坐椅子一样。膝盖不要内扣。</i>
-        </div>
-
-        <div style="margin-bottom:15px;">
-            <b>🧘‍♂️ 饭后靠墙站 (Wall Stand) - 治胀气</b><br>
-            <small>针对：吃撑了、胃不消化。</small><br>
-            <i>做法：吃完饭，后脑勺、肩膀、屁股、脚后跟紧贴墙壁，站立 5-10 分钟。比吃药还管用。</i>
-        </div>
-    </div>
-
-    <div class="tips">
-        <strong>💡 Ben的教练提示：</strong><br>
-        1. <b>鞋子</b>：既然每天都要走，买一双好点的支撑系跑鞋 (如 Asics Kayano 或 New Balance 860)，保护膝盖。<br>
-        2. <b>心率</b>：不需要跑得气喘吁吁。**快走**到身体微微出汗、有点热，就是脂肪在燃烧的信号。<br>
-        3. <b>下雨怎么办？</b> 在家里客厅开着电视，原地踏步或者做“高抬腿”，也比坐着强。
-    </div>
-    
-    <div style="text-align:center; margin-top:30px; color:#999; font-size:0.8rem;">
-        Generated by Gemini for Ben • 2026
-    </div>
-</div>
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">📅</span>
+            周计划
+        </a>
+        <a href="recipes.html" class="nav-item">
+            <span class="nav-icon">🍳</span>
+            怎么吃/做
+        </a>
+        <a href="workout.html" class="nav-item active">
+            <span class="nav-icon">🏃‍♂️</span>
+            去运动
+        </a>
+    </nav>
 
 </body>
 </html>
