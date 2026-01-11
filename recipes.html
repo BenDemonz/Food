@@ -1,54 +1,282 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ben的食谱推荐</title>
-<style>
-    /* 保持和主页一样的样式 */
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 10px; color: #333; }
-    .container { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden; }
-    header { background-color: #2c3e50; color: #fff; padding: 15px; text-align: center; }
-    h2 { margin: 0; font-size: 1.3rem; }
-    
-    /* 导航栏样式 */
-    nav { background-color: #34495e; padding: 10px; text-align: center; }
-    nav a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 16px; }
-    nav a:hover { text-decoration: underline; color: #f1c40f; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ben's Weekly Diet Plan</title>
+    <style>
+        :root {
+            --primary-color: #2e7d32; /* Green */
+            --accent-color: #e65100; /* Orange for warnings */
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-color: #333;
+        }
 
-    .content { padding: 20px; }
-    .recipe-card { border: 1px solid #eee; padding: 15px; margin-bottom: 20px; border-radius: 8px; background: #fafafa; }
-    .recipe-title { color: #2980b9; font-weight: bold; font-size: 1.1em; }
-</style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; color: var(--primary-color); font-size: 1.8rem; }
+        p.subtitle { color: #666; margin-top: 5px; }
+
+        .daily-routine {
+            background-color: #e8f5e9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .daily-routine h3 { margin-top: 0; color: var(--primary-color); }
+        .daily-routine ul { padding-left: 20px; margin-bottom: 0; }
+
+        .day-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .day-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1a237e;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: baseline;
+        }
+
+        .meal-label {
+            font-weight: bold;
+            width: 60px;
+            flex-shrink: 0;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .meal-content {
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+            color: #555;
+        }
+
+        .tag.pill { background: #e3f2fd; color: #0d47a1; font-weight: bold; }
+        .tag.warn { background: #fff3e0; color: #ef6c00; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        @media (max-width: 600px) {
+            .meal-row { flex-direction: column; }
+            .meal-label { margin-bottom: 4px; color: var(--primary-color); }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h2>🥗 Ben的食谱推荐</h2>
+        <h1>Ben's 7-Day Protocol</h1>
+        <p class="subtitle">目标：降胆固醇 (LDL) · 消除内脏脂肪 · 养胃去胀</p>
     </header>
 
-    <nav>
-        <a href="index.html">🔙 返回首页 (Home)</a>
-        <a href="recipes.html" style="color: #f1c40f; font-weight: bold;">食谱推荐 (Recipes)</a>
-    </nav>
+    <div class="daily-routine">
+        <h3>⚡ 每日核心规则 (Daily Rules)</h3>
+        <ul>
+            <li>💊 <b>消化酶 (Nutra-Life)</b>：午餐和晚餐，吃第一口饭前服用。</li>
+            <li>🥬 <b>泡菜 (Kimchi)</b>：晚餐必吃，帮助消化肉类。</li>
+            <li>🌰 <b>坚果 (Nuts)</b>：每天死守 30g (一小把)，不可多吃。</li>
+            <li>🍓 <b>草莓 (Strawberry)</b>：从冰箱拿出后回温15分钟再吃，防胃痛。</li>
+            <li>🚶 <b>运动</b>：晚餐后散步 40 分钟 (雷打不动)。</li>
+        </ul>
+    </div>
 
-    <div class="content">
-        <h3>简单护肝食谱</h3>
-        
-        <div class="recipe-card">
-            <div class="recipe-title">1. 清蒸白身鱼 (Steamed White Fish)</div>
-            <p><strong>食材：</strong>巴沙鱼或盲曹鱼片 200g，姜丝，葱丝。<br>
-            <strong>做法：</strong>鱼片铺在盘中，放姜丝，水开后蒸 8 分钟。倒掉腥水，淋上一勺蒸鱼豉油，撒葱花。</p>
+    <div class="day-card">
+        <div class="day-title">周一 Monday <span>🚀 启动日</span></div>
+        <div class="meal-row">
+            <span class="meal-label">早餐</span>
+            <div class="meal-content">2个水煮蛋 (带去公司) + 黑咖啡/茶</div>
         </div>
+        <div class="meal-row">
+            <span class="meal-label">加餐</span>
+            <div class="meal-content">10:30am: 17g 坚果 (从那30g里分出来的)</div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">午餐</span>
+            <div class="meal-content">
+                金枪鱼三明治 (Tuna Sandwich)<br>
+                <small>1罐泉水金枪鱼 + 2片黑麦面包 + 生菜 + 小番茄</small>
+                <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">下午</span>
+            <div class="meal-content">4-5颗草莓 (回温) + 剩下的坚果 + 希腊酸奶</div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">晚餐</span>
+            <div class="meal-content">
+                <b>清蒸/香煎鱼片</b> (买 Basa 或 Salmon)<br>
+                配菜：焯水菠菜/小白菜 (淋醋)<br>
+                主食：半碗糙米饭 + <b>一碟泡菜</b>
+                <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+    </div>
 
-        <div class="recipe-card">
-            <div class="recipe-title">2. 杂粮鸡胸肉饭团 (Grain Rice Balls)</div>
-            <p><strong>食材：</strong>糙米饭，鸡胸肉碎，海苔。<br>
-            <strong>做法：</strong>鸡胸肉煮熟撕碎，拌入煮好的杂粮饭中，捏成饭团，包一片海苔。</p>
+    <div class="day-card">
+        <div class="day-title">周二 Tuesday <span>🥗 轻断食感</span></div>
+        <div class="meal-row">
+            <span class="meal-label">早餐</span>
+            <div class="meal-content">希腊酸奶 + 5颗蓝莓/草莓 + 坚果碎</div>
         </div>
-        
-        <p><i>更多食谱更新中...</i></p>
+        <div class="meal-row">
+            <span class="meal-label">午餐</span>
+            <div class="meal-content">
+                <b>公司附近轻食/沙拉</b> (加鸡胸肉)<br>
+                <span class="tag warn">⚠️ 酱汁减半</span> <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">晚餐</span>
+            <div class="meal-content">
+                <b>番茄豆腐煲</b><br>
+                <small>用小番茄炒出汁，加嫩豆腐、金针菇煮汤</small><br>
+                配菜：凉拌黄瓜 (加醋)<br>
+                主食：1根煮玉米
+                <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-title">周三 Wednesday <span>🍜 嗦面日 (改良版)</span></div>
+        <div class="meal-row">
+            <span class="meal-label">早餐</span>
+            <div class="meal-content">2个水煮蛋 + 全麦/黑麦面包 1片</div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">午餐</span>
+            <div class="meal-content">金枪鱼拌沙拉菜 (自带) + 半个全麦馒头/面包 <span class="tag pill">💊 酶</span></div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">晚餐</span>
+            <div class="meal-content">
+                <b>自制荞麦汤面 (Soba)</b><br>
+                <span class="tag warn">⚠️ 面条只放平时一半</span><br>
+                配料：大量的豆芽、几片酱牛肉/鸡胸、青菜<br>
+                汤底：加醋、不喝汤
+                <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-title">周四 Thursday <span>🥕 养胃日</span></div>
+        <div class="meal-row">
+            <span class="meal-label">早餐</span>
+            <div class="meal-content">燕麦粥 (如有) 或 希腊酸奶</div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">午餐</span>
+            <div class="meal-content">外食杂菜饭 (选：蒸蛋、青菜、蒸鱼/鸡) <span class="tag pill">💊 酶</span></div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">晚餐</span>
+            <div class="meal-content">
+                <b>白萝卜牛肉汤</b> (清炖，不放油)<br>
+                <small>萝卜炖软烂，牛肉切片</small><br>
+                配菜：一碟泡菜<br>
+                主食：红薯或半碗杂粮饭
+                <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-title">周五 Friday <span>🥟 饺子夜</span></div>
+        <div class="meal-row">
+            <span class="meal-label">早餐</span>
+            <div class="meal-content">2个水煮蛋 + 黑咖啡</div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">午餐</span>
+            <div class="meal-content">三明治 (黑麦面包+鸡蛋+生菜) <span class="tag pill">💊 酶</span></div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">晚餐</span>
+            <div class="meal-content">
+                <b>水煮饺子 (10-12个)</b><br>
+                蘸料：大量的醋 + 蒜泥 (少辣)<br>
+                <b>前菜：先吃一碟泡菜开胃</b>
+                <span class="tag pill">💊 酶</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-title">周末 Weekend <span>💆‍♂️ 放松与调整</span></div>
+        <div class="meal-row">
+            <span class="meal-label">Cheat Meal</span>
+            <div class="meal-content">
+                周六中午可以吃一顿好的 (如牛排/火锅)。<br>
+                <span class="tag warn">条件：餐后必须散步1小时 + 晚餐只吃蔬菜</span>
+            </div>
+        </div>
+        <div class="meal-row">
+            <span class="meal-label">备餐</span>
+            <div class="meal-content">
+                周日晚上：煮好下周的鸡蛋，分装坚果，检查酸奶存货。
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Generated by Gemini for Ben • 2026
     </div>
 </div>
 
