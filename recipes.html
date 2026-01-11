@@ -3,305 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ben's Healthy Kitchen</title>
+    <title>Ben's Recipes</title>
     <style>
-        :root {
-            --primary: #2e7d32;
-            --secondary: #e65100;
-            --bg: #f0f2f5;
-            --card: #ffffff;
-        }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f4f6f8; margin: 0; padding-bottom: 60px; color: #333; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; border-top: 1px solid #eee; }
+        .nav-item { text-decoration: none; color: #999; font-size: 0.8rem; text-align: center; flex: 1; }
+        .nav-item.active { color: #e65100; font-weight: bold; } /* Orange for food */
+        .nav-icon { display: block; font-size: 1.5rem; margin-bottom: 2px; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: var(--bg);
-            color: #333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        /* 顶部导航 */
-        .navbar {
-            background: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: #666;
-            font-weight: bold;
-            font-size: 0.9rem;
-            padding: 8px 12px;
-            border-radius: 20px;
-        }
-
-        .nav-item.active {
-            background: #e8f5e9;
-            color: var(--primary);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        /* 标题区 */
-        header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        h1 { margin: 0; color: var(--primary); }
-        p.subtitle { margin: 5px 0 0; color: #666; font-size: 0.9rem; }
-
-        /* 卡片通用样式 */
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        h2 { border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-top: 0; font-size: 1.3rem; color: #333; }
-
-        /* 食谱表样式 */
-        .meal-row { display: flex; margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 12px; }
-        .meal-time { font-weight: bold; width: 60px; flex-shrink: 0; color: #555; font-size: 0.9rem; }
-        .meal-info { flex-grow: 1; font-size: 0.95rem; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { background: #e65100; color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
         
-        .tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-left: 5px; font-weight: bold; }
-        .tag-pill { background: #e3f2fd; color: #1565c0; } /* 药 */
-        .tag-warn { background: #fff3e0; color: #ef6c00; } /* 警告 */
-
-        /* 红绿灯表格样式 */
-        .traffic-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .traffic-table th { background: #f8f9fa; padding: 10px; text-align: left; font-size: 0.9rem; }
-        .traffic-table td { padding: 10px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 0.9rem; }
-        .bg-green { background-color: #e8f5e9; color: #1b5e20; }
-        .bg-red { background-color: #ffebee; color: #c62828; }
+        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        h2 { margin-top: 0; font-size: 1.2rem; color: #e65100; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        /* 菜谱详情折叠 */
+        /* 做法折叠样式 */
         details { margin-bottom: 10px; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
-        summary { padding: 12px; background: #fafafa; cursor: pointer; font-weight: bold; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        summary::after { content: '+'; font-size: 1.2rem; color: #999; }
-        details[open] summary::after { content: '-'; }
-        .recipe-content { padding: 15px; border-top: 1px solid #eee; background: #fff; }
-        .recipe-step { margin-bottom: 8px; padding-left: 20px; position: relative; }
-        .recipe-step::before { content: '•'; position: absolute; left: 0; color: var(--primary); }
-
-        /* 每日打卡区 */
-        .daily-check { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--primary); }
-        .daily-check ul { margin: 0; padding-left: 20px; }
-        .daily-check li { margin-bottom: 5px; }
-
-        @media (max-width: 600px) {
-            .navbar { font-size: 0.8rem; }
-            .traffic-table { display: block; overflow-x: auto; }
-        }
+        summary { padding: 12px; background: #fafafa; cursor: pointer; font-weight: bold; }
+        .recipe-content { padding: 15px; background: #fff; border-top: 1px solid #eee; font-size: 0.95rem; }
+        
+        /* 红绿灯表格 */
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+        .bg-green { background: #e8f5e9; color: #1b5e20; }
+        .bg-red { background: #ffebee; color: #c62828; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="#weekly-plan" class="nav-item">📅 本周食谱</a>
-        <a href="#food-db" class="nav-item">🚦 红绿灯库</a>
-        <a href="#recipes" class="nav-item">🍳 做法大全</a>
-    </nav>
-
     <div class="container">
         <header>
-            <h1>Ben's 护肝养胃计划</h1>
-            <p class="subtitle">目标：降胆固醇 · 消内脏脂肪 · 强健胃动力</p>
+            <h1 style="margin:0; font-size:1.5rem;">厨房宝典</h1>
+            <p style="margin:5px 0 0; opacity:0.9; font-size:0.9rem;">红绿灯库 & 懒人做法</p>
         </header>
 
-        <div class="daily-check">
-            <strong>⚡ 每日铁律 (Daily Rules):</strong>
-            <ul>
-                <li>💊 <b>Nutra-Life 消化酶</b>：午/晚餐第一口饭前吞服。</li>
-                <li>🥜 <b>坚果</b>：每天死守 30g (一小把)。</li>
-                <li>🍓 <b>草莓</b>：必须回温后吃，每天限半盒。</li>
-                <li>🚶 <b>运动</b>：晚餐后散步 40 分钟。</li>
-            </ul>
+        <div class="card">
+            <h2>🍳 懒人做法 (点击展开)</h2>
+            
+            <details>
+                <summary>🍲 白萝卜清炖牛肉 (养胃王牌)</summary>
+                <div class="recipe-content">
+                    1. 牛肉冷水下锅焯水洗净。<br>
+                    2. 砂锅放水、姜片、牛肉，炖40分钟。<br>
+                    3. 放白萝卜块，再炖20分钟。<br>
+                    4. <b>只加盐和白胡椒，不放油。</b>
+                </div>
+            </details>
+
+            <details>
+                <summary>🐟 懒人蒸鱼 (Basa/Salmon)</summary>
+                <div class="recipe-content">
+                    1. 鱼解冻擦干，盘底铺姜丝。<br>
+                    2. 水开后上锅蒸 6-8 分钟。<br>
+                    3. 倒掉腥水，淋一勺酱油。<br>
+                    4. <b>不用泼热油！</b>
+                </div>
+            </details>
+            
+            <details>
+                <summary>🥪 金枪鱼三明治</summary>
+                <div class="recipe-content">
+                    1. <b>必做：</b>把罐头里的水沥干。<br>
+                    2. 两片黑麦面包，铺上鱼肉。<br>
+                    3. 盖上大量生菜/黄瓜/小番茄。<br>
+                    4. 撒黑胡椒。不加蛋黄酱。
+                </div>
+            </details>
         </div>
 
-        <div id="weekly-plan">
-            <div class="card">
-                <h2>📅 周一至周五 (Weekdays)</h2>
-                
-                <div style="background:#f9f9f9; padding:10px; border-radius:8px; margin-bottom:15px;">
-                    <div style="font-weight:bold; color:#1565c0; margin-bottom:10px;">🔵 周一：启动日</div>
-                    <div class="meal-row">
-                        <span class="meal-time">早餐</span>
-                        <div class="meal-info">2个水煮蛋 (带去公司) + 黑咖啡</div>
-                    </div>
-                    <div class="meal-row">
-                        <span class="meal-time">午餐</span>
-                        <div class="meal-info">金枪鱼三明治 (黑麦面包+泉水金枪鱼+生菜) <span class="tag tag-pill">💊酶</span></div>
-                    </div>
-                    <div class="meal-row">
-                        <span class="meal-time">加餐</span>
-                        <div class="meal-info">15:30 吃坚果(17g) + 草莓(回温)</div>
-                    </div>
-                    <div class="meal-row">
-                        <span class="meal-time">晚餐</span>
-                        <div class="meal-info">清蒸巴沙鱼/三文鱼 + 菠菜 + 糙米饭 + <b>泡菜</b> <span class="tag tag-pill">💊酶</span></div>
-                    </div>
-                </div>
-
-                <div style="background:#f9f9f9; padding:10px; border-radius:8px; margin-bottom:15px;">
-                    <div style="font-weight:bold; color:#1565c0; margin-bottom:10px;">🔵 周二：轻断食感</div>
-                    <div class="meal-row">
-                        <span class="meal-time">晚餐</span>
-                        <div class="meal-info">番茄豆腐煲 (小番茄+嫩豆腐+金针菇) + 1根煮玉米 <span class="tag tag-pill">💊酶</span></div>
-                    </div>
-                </div>
-
-                <div style="background:#f9f9f9; padding:10px; border-radius:8px; margin-bottom:15px;">
-                    <div style="font-weight:bold; color:#1565c0; margin-bottom:10px;">🔵 周三：荞麦面日</div>
-                    <div class="meal-row">
-                        <span class="meal-time">晚餐</span>
-                        <div class="meal-info">酸汤荞麦面 (大量豆芽+鸡胸肉+醋) <span class="tag tag-warn">面减半</span> <span class="tag tag-pill">💊酶</span></div>
-                    </div>
-                </div>
-
-                 <div style="background:#f9f9f9; padding:10px; border-radius:8px; margin-bottom:15px;">
-                    <div style="font-weight:bold; color:#1565c0; margin-bottom:10px;">🔵 周四：养胃日</div>
-                    <div class="meal-row">
-                        <span class="meal-time">晚餐</span>
-                        <div class="meal-info">白萝卜牛肉汤 (清炖) + 泡菜 + 红薯 <span class="tag tag-pill">💊酶</span></div>
-                    </div>
-                </div>
-
-                 <div style="background:#f9f9f9; padding:10px; border-radius:8px; margin-bottom:15px;">
-                    <div style="font-weight:bold; color:#1565c0; margin-bottom:10px;">🔵 周五：饺子夜</div>
-                    <div class="meal-row">
-                        <span class="meal-time">晚餐</span>
-                        <div class="meal-info">水煮饺子(10-12个) + 醋蒜汁 + 泡菜 <span class="tag tag-pill">💊酶</span></div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="card">
+            <h2>🚦 能吃什么？(红绿灯库)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="20%">类别</th>
+                        <th class="bg-green">✅ 绿灯 (吃)</th>
+                        <th class="bg-red">❌ 红灯 (停)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>主食</b></td>
+                        <td class="bg-green">糙米、黑麦面包(2片)、红薯</td>
+                        <td class="bg-red">生煎包、炒饭、糯米</td>
+                    </tr>
+                    <tr>
+                        <td><b>肉类</b></td>
+                        <td class="bg-green">鸡蛋、泉水金枪鱼、鱼、虾</td>
+                        <td class="bg-red">五花肉、炸猪排、香肠</td>
+                    </tr>
+                    <tr>
+                        <td><b>水果</b></td>
+                        <td class="bg-green">草莓(10颗)、奇异果、青苹果</td>
+                        <td class="bg-red">西瓜(晚上禁)、葡萄</td>
+                    </tr>
+                    <tr>
+                        <td><b>零食</b></td>
+                        <td class="bg-green">坚果(30g)、希腊酸奶(无糖)</td>
+                        <td class="bg-red">饼干、薯片、含糖饮料</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div id="recipes">
-            <div class="card">
-                <h2>🍳 简易做法 (How to Cook)</h2>
-                <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">针对你的食材定制的极简菜谱。</p>
-
-                <details>
-                    <summary>🍲 白萝卜清炖牛肉 (养胃王牌)</summary>
-                    <div class="recipe-content">
-                        <div class="recipe-step"><b>食材：</b>白萝卜半根(切块)、瘦牛肉(切块)、姜片、葱。</div>
-                        <div class="recipe-step"><b>步骤1：</b>牛肉冷水下锅，煮沸撇去浮沫，捞出洗净。</div>
-                        <div class="recipe-step"><b>步骤2：</b>砂锅/汤锅里放水、牛肉、姜片，大火烧开转小火炖 40分钟。</div>
-                        <div class="recipe-step"><b>步骤3：</b>加入白萝卜，再炖 20分钟直到萝卜变透明。</div>
-                        <div class="recipe-step"><b>关键：</b>出锅前只加盐和白胡椒粉。<b>不放油！</b>汤里的消化酶能帮你化解胃胀。</div>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>🐟 懒人蒸鱼 (Basa/Salmon)</summary>
-                    <div class="recipe-content">
-                        <div class="recipe-step"><b>食材：</b>冷冻巴沙鱼柳 或 新鲜三文鱼、葱姜丝、蒸鱼豉油(或酱油)。</div>
-                        <div class="recipe-step"><b>步骤1：</b>鱼解冻擦干，盘底铺姜丝。</div>
-                        <div class="recipe-step"><b>步骤2：</b>水烧开后，把鱼放上去蒸 6-8 分钟（不要蒸老了）。</div>
-                        <div class="recipe-step"><b>步骤3：</b>出锅倒掉盘子里的腥水，淋上一勺酱油。</div>
-                        <div class="recipe-step"><b>关键：</b>不用泼热油！你的脂肪肝不需要那勺油。</div>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>🍅 番茄豆腐金针菇煲</summary>
-                    <div class="recipe-content">
-                        <div class="recipe-step"><b>食材：</b>小番茄/大番茄、嫩豆腐、金针菇。</div>
-                        <div class="recipe-step"><b>步骤1：</b>锅里喷一点点油，把番茄炒软出汁（加点水压成泥）。</div>
-                        <div class="recipe-step"><b>步骤2：</b>加水煮开，放入切块的豆腐和金针菇。</div>
-                        <div class="recipe-step"><b>步骤3：</b>煮5分钟，加盐和一点蚝油调味。</div>
-                        <div class="recipe-step"><b>关键：</b>酸酸甜甜很开胃，且没有肉类的负担，适合轻断食日。</div>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>🥗 Ben's 金枪鱼三明治</summary>
-                    <div class="recipe-content">
-                        <div class="recipe-step"><b>食材：</b>Abbott's Light Rye 黑麦面包(2片)、John West Springwater Tuna(1小罐)、生菜/黄瓜。</div>
-                        <div class="recipe-step"><b>步骤1：</b>把金枪鱼罐头里的水沥干（必须沥干，否则面包会湿）。</div>
-                        <div class="recipe-step"><b>步骤2：</b>金枪鱼肉铺在面包上，撒一点黑胡椒。</div>
-                        <div class="recipe-step"><b>步骤3：</b>盖上厚厚的生菜和黄瓜片。</div>
-                        <div class="recipe-step"><b>关键：</b>不加蛋黄酱(Mayo)！如果太干，可以把小番茄切开挤点汁上去，或者放一片泡菜。</div>
-                    </div>
-                </details>
-            </div>
-        </div>
-
-        <div id="food-db">
-            <div class="card">
-                <h2>🚦 红绿灯食材库 (Checklist)</h2>
-                <div style="overflow-x:auto;">
-                    <table class="traffic-table">
-                        <thead>
-                            <tr>
-                                <th>类别</th>
-                                <th class="bg-green">✅ 绿灯 (常吃)</th>
-                                <th class="bg-red">❌ 红灯 (禁止)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><b>主食</b></td>
-                                <td class="bg-green">糙米、黑麦面包(2片)、荞麦面、红薯、玉米</td>
-                                <td class="bg-red">生煎包、糯米、炒饭、起酥面包</td>
-                            </tr>
-                            <tr>
-                                <td><b>蛋白质</b></td>
-                                <td class="bg-green">鸡蛋、泉水金枪鱼、豆腐、白身鱼、虾仁</td>
-                                <td class="bg-red">五花肉、炸猪排、香肠、油浸罐头</td>
-                            </tr>
-                            <tr>
-                                <td><b>蔬菜</b></td>
-                                <td class="bg-green">白萝卜(消食)、菠菜、西葫芦、豆芽、海带</td>
-                                <td class="bg-red">地三鲜(油炸)、红烧茄子、勾芡蔬菜</td>
-                            </tr>
-                            <tr>
-                                <td><b>水果</b></td>
-                                <td class="bg-green">草莓(10颗)、奇异果(饭后)、青苹果</td>
-                                <td class="bg-red">葡萄、西瓜(晚上禁吃)、鲜榨果汁</td>
-                            </tr>
-                            <tr>
-                                <td><b>零食</b></td>
-                                <td class="bg-green">坚果(30g)、希腊酸奶(无糖)、小番茄</td>
-                                <td class="bg-red">薯片、饼干、含糖饮料、果脯</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align:center; color:#999; margin-top:20px; font-size:0.8rem;">
-            Generated by Gemini for Ben • 2026
-        </div>
-
     </div>
 
-    <script>
-        // 简单的脚本：点击导航时平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">📅</span>
+            周计划
+        </a>
+        <a href="recipes.html" class="nav-item active">
+            <span class="nav-icon">🍳</span>
+            怎么吃/做
+        </a>
+        <a href="workout.html" class="nav-item">
+            <span class="nav-icon">🏃‍♂️</span>
+            去运动
+        </a>
+    </nav>
+
 </body>
 </html>
