@@ -5,37 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ben's Recipes</title>
     <style>
-        body { font-family: system-ui, -apple-system, sans-serif; background: #f4f6f8; margin: 0; padding-bottom: 60px; color: #333; }
-        .nav-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; border-top: 1px solid #eee; }
-        .nav-item { text-decoration: none; color: #999; font-size: 0.8rem; text-align: center; flex: 1; }
-        .nav-item.active { color: #e65100; font-weight: bold; } /* Orange for food */
-        .nav-icon { display: block; font-size: 1.5rem; margin-bottom: 2px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f4f6f8; margin: 0; color: #333; padding-top: 60px; }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            display: flex; justify-content: center;
+            padding: 10px 0; z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-item {
+            text-decoration: none; color: #666; font-size: 0.9rem; font-weight: bold;
+            padding: 8px 16px; border-radius: 20px; transition: all 0.2s;
+        }
+        /* 当前页面高亮 - 橙色 */
+        .nav-item.active { background: #fff3e0; color: #e65100; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { background: #e65100; color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; }
-        
-        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .card { background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .header-banner { background: #e65100; color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; text-align: center; }
+
         h2 { margin-top: 0; font-size: 1.2rem; color: #e65100; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        /* 做法折叠样式 */
+        /* 折叠菜单 */
         details { margin-bottom: 10px; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
-        summary { padding: 12px; background: #fafafa; cursor: pointer; font-weight: bold; }
-        .recipe-content { padding: 15px; background: #fff; border-top: 1px solid #eee; font-size: 0.95rem; }
+        summary { padding: 12px; background: #fafafa; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: '+'; color: #bbb; font-size: 1.2rem; }
+        details[open] summary::after { content: '-'; }
+        .recipe-content { padding: 15px; background: #fff; border-top: 1px solid #eee; font-size: 0.95rem; line-height: 1.6; }
         
-        /* 红绿灯表格 */
+        /* 表格 */
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+        th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
         .bg-green { background: #e8f5e9; color: #1b5e20; }
         .bg-red { background: #ffebee; color: #c62828; }
     </style>
 </head>
 <body>
 
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">📅 周计划</a>
+            <a href="recipes.html" class="nav-item active">🍳 食谱库</a>
+            <a href="workout.html" class="nav-item">🏃‍♂️ 运动</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <header>
-            <h1 style="margin:0; font-size:1.5rem;">厨房宝典</h1>
-            <p style="margin:5px 0 0; opacity:0.9; font-size:0.9rem;">红绿灯库 & 懒人做法</p>
-        </header>
+        <div class="header-banner">
+            <h1 style="margin:0; font-size:1.6rem;">厨房宝典</h1>
+            <p style="margin:5px 0 0; opacity:0.9; font-size:0.9rem;">懒人做法 & 红绿灯库</p>
+        </div>
 
         <div class="card">
             <h2>🍳 懒人做法 (点击展开)</h2>
@@ -46,7 +70,8 @@
                     1. 牛肉冷水下锅焯水洗净。<br>
                     2. 砂锅放水、姜片、牛肉，炖40分钟。<br>
                     3. 放白萝卜块，再炖20分钟。<br>
-                    4. <b>只加盐和白胡椒，不放油。</b>
+                    4. <b>只加盐和白胡椒，不放油。</b><br>
+                    <small style="color:#666;">*萝卜能化痰消食，牛肉汤不要喝太多油。</small>
                 </div>
             </details>
 
@@ -69,10 +94,20 @@
                     4. 撒黑胡椒。不加蛋黄酱。
                 </div>
             </details>
+
+            <details>
+                <summary>🍜 简易酸汤荞麦面</summary>
+                <div class="recipe-content">
+                    1. 荞麦面煮熟过凉水。<br>
+                    2. 碗底：大量陈醋、少许生抽、蒜末。<br>
+                    3. 烫一大把豆芽铺在碗底（增加体积）。<br>
+                    4. 放入面条，拌匀。配两个荷包蛋。
+                </div>
+            </details>
         </div>
 
         <div class="card">
-            <h2>🚦 能吃什么？(红绿灯库)</h2>
+            <h2>🚦 红绿灯库 (能吃什么?)</h2>
             <table>
                 <thead>
                     <tr>
@@ -106,21 +141,5 @@
             </table>
         </div>
     </div>
-
-    <nav class="nav-bar">
-        <a href="index.html" class="nav-item">
-            <span class="nav-icon">📅</span>
-            周计划
-        </a>
-        <a href="recipes.html" class="nav-item active">
-            <span class="nav-icon">🍳</span>
-            怎么吃/做
-        </a>
-        <a href="workout.html" class="nav-item">
-            <span class="nav-icon">🏃‍♂️</span>
-            去运动
-        </a>
-    </nav>
-
 </body>
 </html>
