@@ -31,15 +31,16 @@
 
         h2 { margin-top: 0; font-size: 1.2rem; color: #1565c0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
-        /* 时间轴 */
+        /* 强调晚间时间轴 */
         .timeline-item { display: flex; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #eee; align-items: center; }
         .time { font-weight: bold; width: 60px; color: #555; font-size: 1.1rem; }
+        .highlight-box { background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 5px solid #1565c0; }
         
         /* 任务打卡框 */
         .task-box { border: 1px solid #eee; border-radius: 8px; padding: 12px; margin-bottom: 10px; background: #fafafa; display: flex; align-items: center; }
         .checkbox { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; margin-right: 12px; }
         
-        .tip { background: #e3f2fd; color: #0d47a1; padding: 15px; border-radius: 8px; font-size: 0.9rem; margin-top: 20px; }
+        .tip { background: #fff3e0; color: #e65100; padding: 15px; border-radius: 8px; font-size: 0.9rem; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -55,22 +56,22 @@
     <div class="container">
         <div class="header-banner">
             <h1 style="margin:0; font-size:1.6rem;">脂肪粉碎机</h1>
-            <p style="margin:5px 0 0; opacity:0.9; font-size:0.9rem;">20:00 黄金燃脂时刻</p>
+            <p style="margin:5px 0 0; opacity:0.9; font-size:0.9rem;">每晚 20:00 准时启动</p>
         </div>
 
         <div class="card">
-            <h2>⏰ 今日时间轴</h2>
+            <h2>🌙 晚间黄金流程 (Evening Only)</h2>
             <div class="timeline-item">
-                <div class="time">07:40</div>
-                <div>喝温水 + 深蹲10个 (唤醒代谢)</div>
+                <div class="time">19:00</div>
+                <div>晚餐结束 (记得吞消化酶)</div>
             </div>
             <div class="timeline-item">
-                <div class="time">13:00</div>
-                <div>午餐后散步 10分钟 (防胃胀)</div>
+                <div class="time">19:30</div>
+                <div>站立/简单家务 (防止坐下堆积脂肪)</div>
             </div>
-            <div class="timeline-item" style="background:#e3f2fd; padding:10px; border-radius:8px; border-bottom:none;">
-                <div class="time">20:00</div>
-                <div><b>🔥 黄金运动时间 (刷脂)</b></div>
+            <div class="highlight-box">
+                <div style="font-weight:bold; font-size:1.1rem; color:#1565c0; margin-bottom:5px;">20:00 🔥 黄金燃脂时刻</div>
+                <div style="font-size:0.9rem;">换上鞋，出门！这是你全天唯一的减脂窗口。</div>
             </div>
         </div>
 
@@ -79,22 +80,22 @@
             
             <div class="task-box">
                 <div class="checkbox"></div>
-                <div><b>周一 (启动)</b>: 散步 40分钟 + 3次快走冲刺</div>
+                <div><b>周一 (启动)</b>: 晚饭后散步 40分钟</div>
             </div>
             
             <div class="task-box">
                 <div class="checkbox"></div>
-                <div><b>周二 (力量)</b>: 散步 30分钟 + 回家深蹲 15个x3组</div>
+                <div><b>周二 (力量)</b>: 散步30分钟 + 回家深蹲 15个x3组</div>
             </div>
             
             <div class="task-box">
                 <div class="checkbox"></div>
-                <div><b>周三 (耐力)</b>: 散步 50分钟 (保持不看手机)</div>
+                <div><b>周三 (耐力)</b>: 散步 50分钟 (保持匀速)</div>
             </div>
             
             <div class="task-box">
                 <div class="checkbox"></div>
-                <div><b>周四 (休息)</b>: 随便走走 20分钟 (消食)</div>
+                <div><b>周四 (休息)</b>: 随便走走 20分钟 (消食为主)</div>
             </div>
 
             <div class="task-box">
@@ -104,14 +105,14 @@
             
             <div class="task-box" style="background:#f1f8e9;">
                 <div class="checkbox"></div>
-                <div><b>周末 (户外)</b>: Point Cook 公园走 1小时</div>
+                <div><b>周末 (白天)</b>: Point Cook 公园走 1小时</div>
             </div>
         </div>
 
         <div class="tip">
-            💡 <b>Ben的贴士</b>：
-            <br>不需要跑！快走到身体微微发热、有点喘但能说话，就是脂肪在燃烧的信号 (Zone 2)。
-            <br>如果下雨，在客厅做高抬腿或爬楼梯代替。
+            💡 <b>Ben的办公室生存法则</b>：
+            <br>既然白天没空动，那就<b>多喝水</b>。
+            <br>多跑几次厕所是你白天唯一的“被动运动”，别久坐超过 2 小时。
         </div>
     </div>
 </body>
